@@ -1,5 +1,17 @@
+import java.util.ArrayList;
+
 public class Profesor extends Persona {
-    String estado;
+    private String estado;
+
+    private ArrayList<Material> lisMateriales;
+
+    void anadirMaterial(Material material){
+        lisMateriales.add(material);
+    }
+
+    void dejarMaterial(Material material){
+        lisMateriales.remove(material);
+    }
 
     public String getEstado() {
         return estado;

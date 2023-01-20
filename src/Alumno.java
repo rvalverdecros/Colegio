@@ -1,5 +1,17 @@
+import java.util.ArrayList;
+
 public class Alumno extends Persona {
     String estado;
+
+    private ArrayList<Material> lisMateriales;
+
+    void anadirMaterial(Material material){
+        lisMateriales.add(material);
+    }
+
+    void dejarMaterial(Material material){
+        lisMateriales.remove(material);
+    }
 
     // Constructor primario y secundario
     Alumno(String dni, String nombre, int edad, char sexo, String estado){

@@ -1,9 +1,10 @@
-public class Aula implements Estado {
+public class Aula {
     private String nombreAula;
     private boolean pizarra;
     private int sillas;
     private int mesas;
-    private String estado;
+    private EstadoAula estado;
+    private Curso curso;
 
     // Constructor primario con todos los atributos como parámetros
     public Aula(String nombreAula, boolean pizarra, int sillas, int mesas) {
@@ -11,7 +12,6 @@ public class Aula implements Estado {
         this.pizarra = pizarra;
         sillasNotZeroOrLess(sillas);
         mesasNotZeroOrLess(mesas);
-        estado = "Libre";
     }
 
     // Constructor secundario en el que no se incluye pizarra, y ésta se setea a false
@@ -20,10 +20,11 @@ public class Aula implements Estado {
         sillasNotZeroOrLess(sillas);
         mesasNotZeroOrLess(mesas);
         pizarra = false;
-        estado = "Libre";
     }
 
     // Getters y Setters
+
+
 
     public String getNombreAula() { return nombreAula; }
     public void setNombreAula(String nombreAula) { this.nombreAula = nombreAula; }
@@ -37,7 +38,7 @@ public class Aula implements Estado {
     public int getMesas() { return mesas; }
     public void setMesas(int mesas) { this.mesas = mesas; }
 
-    public String getEstado() { return estado; }
+    public EstadoAula getEstado() { return estado; }
 
     // Métodos privados
     private void sillasNotZeroOrLess(int sillas) {
@@ -48,16 +49,6 @@ public class Aula implements Estado {
         if (mesas < 0) mesas = 0;
         this.mesas = mesas;
     }
-
-    // Métodos
-    @Override
-    public void libre() { estado = "Libre"; }
-
-    @Override
-    public void ocupado() { estado = "Ocupado"; }
-
-    @Override
-    public void enObras() { estado = "En obras"; }
 
     public String toString() {
         String tienePizarra = "";
