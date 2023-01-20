@@ -1,5 +1,6 @@
-public interface Actividades {
-    public void teatro();
-    public void jornadaDeportiva();
-    public void celebracion();
+public class Actividades {
+    static String teatro = "teatro";
+    static String jornadaDep = "Jornada Deportiva";
+    static String celebracion = "Celebracion";
+
 }
