@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Profesor extends Persona {
     private String estado;
 
+    private boolean miembroDirectivo;
     private ArrayList<Material> lisMateriales;
 
     void anadirMaterial(Material material){
@@ -19,6 +20,14 @@ public class Profesor extends Persona {
 
     public void setEstado(String estado){
         this.estado = estado;
+    }
+
+    public boolean isMiembroDirectivo() {
+        return miembroDirectivo;
+    }
+
+    public void setMiembroDirectivo(boolean miembroDirectivo) {
+        this.miembroDirectivo = miembroDirectivo;
     }
 
     Profesor(String dni, String nombre, int edad, char sexo, String estado){

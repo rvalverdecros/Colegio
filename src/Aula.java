@@ -24,8 +24,6 @@ public class Aula {
 
     // Getters y Setters
 
-
-
     public String getNombreAula() { return nombreAula; }
     public void setNombreAula(String nombreAula) { this.nombreAula = nombreAula; }
 
@@ -39,6 +37,18 @@ public class Aula {
     public void setMesas(int mesas) { this.mesas = mesas; }
 
     public EstadoAula getEstado() { return estado; }
+
+    public void setEstado(EstadoAula estado) {
+        this.estado = estado;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
 
     // Métodos privados
     private void sillasNotZeroOrLess(int sillas) {
