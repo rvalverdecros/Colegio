@@ -10,6 +10,10 @@ public class Colegio {
     private ArrayList<Profesor> profesores = new ArrayList<>();
     private Direccion direccion = new Direccion(3);
 
+    void anadirAula(Aula aula){
+        aulas.add(aula);
+    }
+
 
 
     public Colegio(String nombre) {
