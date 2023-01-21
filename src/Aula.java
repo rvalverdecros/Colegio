@@ -3,7 +3,7 @@ public class Aula {
     private boolean pizarra;
     private int sillas;
     private int mesas;
-    private EstadoAula estado;
+    private String estado;
     private Curso curso;
 
     // Constructor primario con todos los atributos como parámetros
@@ -36,9 +36,9 @@ public class Aula {
     public int getMesas() { return mesas; }
     public void setMesas(int mesas) { this.mesas = mesas; }
 
-    public EstadoAula getEstado() { return estado; }
+    public String getEstado() { return estado; }
 
-    public void setEstado(EstadoAula estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

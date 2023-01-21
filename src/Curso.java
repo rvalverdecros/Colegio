@@ -4,7 +4,7 @@ public class Curso {
 
     private String nombre;
 
-    private EstadoCurso estado;
+    private String estado;
 
     private ArrayList<Alumno> lisAlumnos;
     private ArrayList<Profesor> lisProfesores;
@@ -25,11 +25,11 @@ public class Curso {
         lisProfesores.remove(profesor);
     }
 
-    public EstadoCurso getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadoCurso estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
