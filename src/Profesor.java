@@ -12,7 +12,7 @@ public class Profesor extends Persona {
         setNombre(nombre);
         edadNoNegativa(edad);
         sexoProfesor(sexo);
-        setEstado(estado);
+        estadoCorrecto(estado);
     }
 
     Profesor(String dni, String nombre, int edad, char sexo) {
@@ -36,7 +36,7 @@ public class Profesor extends Persona {
     }
 
     public void setEstado(String estado){
-        this.estado = estado;
+        estadoCorrecto(estado);
     }
 
     public boolean isMiembroDirectivo() {
@@ -58,6 +58,12 @@ public class Profesor extends Persona {
         setEdad(edad);
     }
 
+    private void estadoCorrecto(String estado) {
+        if (estado != "Nuevo".toLowerCase() || estado != "Jubilado".toLowerCase()) this.estado = "Nuevo";
+        this.estado = estado;
+    }
+
+    // Métodos
     public String toString() {
         String directivo = "";
         if (miembroDirectivo) directivo = "Sí"; else directivo = "No";
