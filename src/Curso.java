@@ -44,4 +44,29 @@ public class Curso {
     Curso(String nombre) {
         this.nombre = nombre;
     }
+
+    private String mostrarAlumnos(){
+        String res = "";
+        for (int i = 0; i< lisAlumnos.size(); i++){
+            res = lisAlumnos.get(i).toString();
+        }
+        return res;
+    }
+
+    private String mostrarProfesores(){
+        String res = "";
+        for (int i = 0; i< lisProfesores.size(); i++){
+            res = lisProfesores.get(i).toString();
+        }
+        return res;
+    }
+
+    public String toString() {
+        return "Curso\n" +
+                "Nombre del curso: " + nombre + "\n"
+                + "Alumnos del curso :" + mostrarAlumnos() + "\n"
+                + "Profesores del curso: " + mostrarProfesores() + "\n"
+                + "Estado del curso: " + estado;
+    }
+
 }
