@@ -1,10 +1,10 @@
 public abstract class Persona {
-
     protected String dni;
     protected String nombre;
     protected int edad;
     protected char sexo;
 
+    // Getters y Setters
     public String getDni() { return this.dni;}
     public String getNombre() { return this.nombre;}
     public int getEdad() { return this.edad;}

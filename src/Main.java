@@ -69,10 +69,10 @@ public class Main {
         System.out.println("2. Creación de curso");
         System.out.println("3. Creación de profesor");
         System.out.println("4. Creación de alumno");
-        System.out.println("5. Modificacion de aula");
-        System.out.println("6. Modificacion de curso");
-        System.out.println("7. Modificacion de profesor");
-        System.out.println("8. Modificacion de alumno");
+        System.out.println("5. Modificación de aula");
+        System.out.println("6. Modificación de curso");
+        System.out.println("7. Modificación de profesor");
+        System.out.println("8. Modificación de alumno");
         System.out.println("9. Borrar un aula");
         System.out.println("10. Borrar un curso");
         System.out.println("11. Borrar un profesor");
@@ -104,6 +104,15 @@ public class Main {
         }
         Aula aula = new Aula(nombre, pizarra, sillas, mesas);
         colegio.anadirAula(aula);
+    }
+
+    private void creacioncurso(Colegio colegio) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Introduzca el nombre del curso: ");
+        String nombre = scanner.nextLine();
+
+        Curso cursoNuevo = new Curso(nombre);
+        colegio.anadirCurso(cursoNuevo);
     }
 
     private void creacionprofesor(Colegio colegio) {

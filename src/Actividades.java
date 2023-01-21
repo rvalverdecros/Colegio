@@ -1,7 +1,7 @@
 public class Actividades {
-    static String clase = "clase";
-    static String teatro = "teatro";
+    static String clase = "Clase";
+    static String teatro = "Teatro";
     static String jornadaDep = "Jornada Deportiva";
-    static String celebracion = "Celebracion";
+    static String celebracion = "Celebración";
 
 }
