@@ -1,32 +1,25 @@
 import java.util.ArrayList;
 
 public class Alumno extends Persona {
+    // Atributos
     String estado;
-
     private ArrayList<Material> lisMateriales;
 
-    void anadirMaterial(Material material){
-        lisMateriales.add(material);
-    }
-
-    void dejarMaterial(Material material){
-        lisMateriales.remove(material);
-    }
 
     // Constructor primario y secundario
     Alumno(String dni, String nombre, int edad, char sexo, String estado){
         setDni(dni);
         setNombre(nombre);
-        setEdad(edad);
-        setSexo(sexo);
+        edadNoNegativa(edad);
+        sexoAlumno(sexo);
         estadoAlumno(estado);
     }
 
     Alumno(String dni, String nombre, int edad, char sexo){
         setDni(dni);
         setNombre(nombre);
-        setEdad(edad);
-        setSexo(sexo);
+        edadNoNegativa(edad);
+        sexoAlumno(sexo);
         setEstado("Nuevo");
     }
 
@@ -36,11 +29,25 @@ public class Alumno extends Persona {
 
     // Métodos privados
     private void estadoAlumno(String estado) {
-        if (estado != "Nuevo".toLowerCase() || estado != "Repetidor".toLowerCase()) estado = "Nuevo";
+        if (estado != "Nuevo".toLowerCase()||estado != "Repetidor".toLowerCase()) estado = "Nuevo";
         this.estado = estado;
     }
 
+    private void sexoAlumno(char sexo) {
+        if (sexo != 'H' || sexo != 'M') setSexo('H');
+        setSexo(sexo);
+    }
+
+    private void edadNoNegativa(int edad) {
+        if (edad < 0) throw new IllegalArgumentException("[ERROR]: Ha introducido una edad negativa");
+        setEdad(edad);
+    }
+
     // Métodos
+    void anadirMaterial(Material material) { lisMateriales.add(material); }
+
+    void dejarMaterial(Material material) { lisMateriales.remove(material); }
+
     public String toString() {
         return "ALUMNO\n" +
                 "Nombre: " + nombre + "\n"
