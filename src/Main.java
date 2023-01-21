@@ -74,6 +74,7 @@ public class Main {
             estado = EstadoAula.libre;
         }
         Aula aula = new Aula(nombre,pizarra,sillas,mesas);
+        colegio.anadirAula(aula);
     }
 
     public static void main(String[] args) {
