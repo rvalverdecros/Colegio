@@ -45,8 +45,8 @@ public class Alumno extends Persona {
 
     // Métodos
     void anadirMaterial(Material material) { lisMateriales.add(material); }
-
     void dejarMaterial(Material material) { lisMateriales.remove(material); }
+    boolean existeMaterial(Material material) { return lisMateriales.contains(material); }
 
     public String toString() {
         return "ALUMNO\n" +

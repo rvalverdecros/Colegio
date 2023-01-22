@@ -67,4 +67,13 @@ public class Colegio {
         }
         return profesorAModificar;
     }
+
+    public Alumno getAlumno (String DNI) {
+        Alumno alumnoAModificar = null;
+
+        for (Alumno alumno: alumnos) {
+            if (alumno.dni == DNI) alumnoAModificar = alumno;
+        }
+        return alumnoAModificar;
+    }
 }

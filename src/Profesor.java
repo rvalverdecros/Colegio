@@ -23,14 +23,7 @@ public class Profesor extends Persona {
         setEstado("Nuevo");
     }
 
-    void anadirMaterial(Material material){
-        lisMateriales.add(material);
-    }
-
-    void dejarMaterial(Material material){
-        lisMateriales.remove(material);
-    }
-
+    // Getters y Setters
     public String getEstado() {
         return estado;
     }
@@ -46,6 +39,10 @@ public class Profesor extends Persona {
     public void setMiembroDirectivo(boolean miembroDirectivo) {
         this.miembroDirectivo = miembroDirectivo;
     }
+
+    public char getSexo() { return sexo; }
+
+    public void setSexo(char sexo) { sexoProfesor(sexo); }
 
     // Métodos privados
     private void sexoProfesor(char sexo) {
@@ -64,6 +61,12 @@ public class Profesor extends Persona {
     }
 
     // Métodos
+    void anadirMaterial(Material material){
+        lisMateriales.add(material);
+    }
+    void dejarMaterial(Material material){ lisMateriales.remove(material); }
+    boolean existeMaterial(Material material) { return lisMateriales.contains(material); }
+
     public String toString() {
         String directivo = "";
         if (miembroDirectivo) directivo = "Sí"; else directivo = "No";

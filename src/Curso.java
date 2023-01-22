@@ -66,6 +66,9 @@ public class Curso {
         lisProfesores.remove(profesor);
     }
 
+    boolean existeAlumno(Alumno alumno) { return lisAlumnos.contains(alumno); }
+    boolean existeProfesor(Profesor profesor) { return lisProfesores.contains(profesor); }
+
     public String toString() {
         return "Curso\n" +
                 "Nombre del curso: " + nombre + "\n"

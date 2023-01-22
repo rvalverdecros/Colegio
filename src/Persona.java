@@ -1,4 +1,5 @@
 public abstract class Persona {
+    // Atributos
     protected String dni;
     protected String nombre;
     protected int edad;
