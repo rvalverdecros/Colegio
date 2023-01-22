@@ -16,42 +16,55 @@ public class Main {
         switch (opcion) {
             case 1 -> {
                 creacionaula(colegio);
+                menu();
             }
             case 2 -> {
                 creacioncurso(colegio);
+                menu();
             }
             case 3 -> {
                 creacionprofesor(colegio);
+                menu();
             }
             case 4 -> {
                 creacionalumno(colegio);
+                menu();
             }
             case 5 -> {
                 modificacionaula(colegio);
+                menu();
             }
             case 6 -> {
                 modificacioncurso(colegio);
+                menu();
             }
             case 7 -> {
                 modificacionprofesor(colegio);
+                menu();
             }
             case 8 -> {
                 modificacionalumno(colegio);
+                menu();
             }
             case 9 -> {
                 borraraula(colegio);
+                menu();
             }
             case 10 -> {
                 borrarcurso(colegio);
+                menu();
             }
             case 11 -> {
                 borrarprofesor(colegio);
+                menu();
             }
             case 12 -> {
                 borraralumno(colegio);
+                menu();
             }
             case 13 -> {
                 mostrartodo(colegio);
+                menu();
             }
             case 14 -> {
                 cerrarsesion();
@@ -87,7 +100,8 @@ public class Main {
         System.out.println("¿Tiene pizarra?");
         String res = scanner.nextLine();
         boolean pizarra;
-        if (res.toLowerCase(Locale.ROOT) == "si") {
+        String resminus = res.toLowerCase();
+        if (resminus.equals("si")) {
             pizarra = true;
         } else {
             pizarra = false;
