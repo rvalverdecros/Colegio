@@ -7,7 +7,7 @@ public class Profesor extends Persona {
     private ArrayList<Material> lisMateriales;
 
     // Constructores
-    Profesor(String dni, String nombre, int edad, char sexo, String estado) {
+    Profesor(String dni, String nombre, int edad, String sexo, String estado) {
         setDni(dni);
         setNombre(nombre);
         edadNoNegativa(edad);
@@ -15,7 +15,7 @@ public class Profesor extends Persona {
         estadoCorrecto(estado);
     }
 
-    Profesor(String dni, String nombre, int edad, char sexo) {
+    Profesor(String dni, String nombre, int edad, String sexo) {
         setDni(dni);
         setNombre(nombre);
         edadNoNegativa(edad);
@@ -24,25 +24,22 @@ public class Profesor extends Persona {
     }
 
     // Getters y Setters
-    public String getEstado() {
-        return estado;
-    }
-    public void setEstado(String estado){
-        estadoCorrecto(estado);
-    }
-    public boolean isMiembroDirectivo() {
-        return miembroDirectivo;
-    }
-    public void setMiembroDirectivo(boolean miembroDirectivo) {
-        this.miembroDirectivo = miembroDirectivo;
-    }
-    public char getSexo() { return sexo; }
-    public void setSexo(char sexo) { sexoProfesor(sexo); }
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { estadoCorrecto(estado); }
+
+    public boolean isMiembroDirectivo() { return miembroDirectivo; }
+    public void setMiembroDirectivo(boolean miembroDirectivo) { this.miembroDirectivo = miembroDirectivo; }
+
+    public String getSexo() { return sexo; }
+    public void setSexo(String sexo) { sexoProfesor(sexo); }
 
     // Métodos privados
-    private void sexoProfesor(char sexo) {
-        if (sexo != 'H' || sexo != 'M') setSexo('H');
-        setSexo(sexo);
+    private void sexoProfesor(String sexo) {
+        if (sexo.toLowerCase() != "hombre" || sexo.toLowerCase() != "mujer") {
+            this.sexo = "hombre";
+        }else {
+            this.sexo = sexo;
+        }
     }
 
     private void edadNoNegativa(int edad) {

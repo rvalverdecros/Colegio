@@ -5,9 +5,8 @@ public class Alumno extends Persona {
     String estado;
     private ArrayList<Material> lisMateriales;
 
-
     // Constructor primario y secundario
-    Alumno(String dni, String nombre, int edad, char sexo, String estado){
+    Alumno(String dni, String nombre, int edad, String sexo, String estado){
         setDni(dni);
         setNombre(nombre);
         edadNoNegativa(edad);
@@ -15,7 +14,7 @@ public class Alumno extends Persona {
         estadoAlumno(estado);
     }
 
-    Alumno(String dni, String nombre, int edad, char sexo){
+    Alumno(String dni, String nombre, int edad, String sexo){
         setDni(dni);
         setNombre(nombre);
         edadNoNegativa(edad);
@@ -33,9 +32,12 @@ public class Alumno extends Persona {
         this.estado = estado;
     }
 
-    private void sexoAlumno(char sexo) {
-        if (sexo != 'H' || sexo != 'M') setSexo('H');
-        setSexo(sexo);
+    private void sexoAlumno(String sexo){
+        if (sexo.toLowerCase() != "hombre" || sexo.toLowerCase() != "mujer") {
+            setSexo("hombre");
+        }else {
+            setSexo(sexo);
+        }
     }
 
     private void edadNoNegativa(int edad) {

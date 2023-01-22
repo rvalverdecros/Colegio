@@ -30,20 +30,28 @@ public class Curso {
     // Métodos privados
     private String mostrarAlumnos(){
         StringBuilder res = new StringBuilder();
-        for (int i = 0; i < lisAlumnos.size(); i++){
-            res.append(lisAlumnos.get(i).toString());
-            res.append("\n");
+        if (lisAlumnos == null) {
+            return res.toString();
+        } else {
+            for (int i = 0; i < lisAlumnos.size(); i++){
+                res.append(lisAlumnos.get(i).toString());
+                res.append("\n");
+            }
+            return res.toString();
         }
-        return res.toString();
     }
 
     private String mostrarProfesores(){
         StringBuilder res = new StringBuilder();
-        for (int i = 0; i< lisProfesores.size(); i++){
-            res.append(lisProfesores.get(i).toString());
-            res.append("\n");
+        if (lisProfesores == null) {
+            return res.toString();
+        } else {
+            for (int i = 0; i < lisProfesores.size(); i++){
+                res.append(lisProfesores.get(i).toString());
+                res.append("\n");
+            }
+            return res.toString();
         }
-        return res.toString();
     }
 
     // Métodos públicos

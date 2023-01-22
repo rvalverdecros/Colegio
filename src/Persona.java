@@ -3,23 +3,20 @@ public abstract class Persona {
     protected String dni;
     protected String nombre;
     protected int edad;
-    protected char sexo;
+    protected String sexo;
 
     // Getters y Setters
     public String getDni() { return this.dni;}
+    public void setDni(String dni) { this.dni = dni; }
+
     public String getNombre() { return this.nombre;}
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
     public int getEdad() { return this.edad;}
-    public char getSexo() { return sexo; }
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-    public void setSexo(char sexo) {
+    public void setEdad(int edad) { this.edad = edad; }
+
+    public String getSexo() { return sexo; }
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 }
