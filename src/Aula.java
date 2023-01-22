@@ -1,4 +1,5 @@
 public class Aula {
+    // Atributos
     private String nombreAula;
     private boolean pizarra;
     private int sillas;
@@ -23,7 +24,6 @@ public class Aula {
     }
 
     // Getters y Setters
-
     public String getNombreAula() { return nombreAula; }
     public void setNombreAula(String nombreAula) { this.nombreAula = nombreAula; }
 
@@ -70,5 +70,4 @@ public class Aula {
                 + "Mesas: " + mesas + "\n"
                 + "Estado: " + estado;
     }
-
 }

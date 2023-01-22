@@ -27,21 +27,16 @@ public class Profesor extends Persona {
     public String getEstado() {
         return estado;
     }
-
     public void setEstado(String estado){
         estadoCorrecto(estado);
     }
-
     public boolean isMiembroDirectivo() {
         return miembroDirectivo;
     }
-
     public void setMiembroDirectivo(boolean miembroDirectivo) {
         this.miembroDirectivo = miembroDirectivo;
     }
-
     public char getSexo() { return sexo; }
-
     public void setSexo(char sexo) { sexoProfesor(sexo); }
 
     // Métodos privados

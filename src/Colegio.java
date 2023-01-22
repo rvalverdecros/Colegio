@@ -20,41 +20,41 @@ public class Colegio {
     void anadirAlumno (Alumno alumno) { alumnos.add(alumno); }
     void anadirProfesor (Profesor profesor) { profesores.add(profesor); }
 
-    void mostrarAula (){
-        for (int i = 0; i < aulas.size(); i++){
-            System.out.println(aulas.get(i).toString());
+    String mostrarAula () {
+        StringBuilder aulasAMostrar = new StringBuilder();
+        for (Aula aula : aulas) {
+            aulasAMostrar.append(aula);
+            aulasAMostrar.append("\n");
         }
+        return aulasAMostrar.toString();
     }
-    void mostrarCurso (){
-        for (int i = 0; i < cursos.size(); i++){
-            System.out.println(cursos.get(i).toString());
+    String mostrarCurso () {
+        StringBuilder cursosAMostrar = new StringBuilder();
+        for (Curso curso : cursos) {
+            cursosAMostrar.append(curso);
+            cursosAMostrar.append("\n");
         }
+        return cursosAMostrar.toString();
     }
-
-    void mostrarAlumno (){
-        for (int i = 0; i < alumnos.size(); i++){
-            System.out.println(alumnos.get(i).toString());
+    String mostrarAlumno () {
+        StringBuilder alumnosAMostrar = new StringBuilder();
+        for (Alumno alumno : alumnos) {
+            alumnosAMostrar.append(alumno);
+            alumnosAMostrar.append("\n");
         }
+        return alumnosAMostrar.toString();
     }
-
-    void mostrarProfesor (){
-        for (int i = 0; i < profesores.size(); i++){
-            System.out.println(profesores.get(i).toString());
+    String mostrarProfesor () {
+        StringBuilder profesoresAMostrar = new StringBuilder();
+        for (Profesor profesor : profesores) {
+            profesoresAMostrar.append(profesor);
+            profesoresAMostrar.append("\n");
         }
+        return profesoresAMostrar.toString();
     }
-
-    void eliminarAula(int numero){
-        aulas.remove(numero);
-    }
-
-    void eliminarCurso(int numero){
-        cursos.remove(numero);
-    }
-
-    void eliminarAlumnos(int numero){
-        alumnos.remove(numero);
-    }
-
+    void eliminarAula(int numero) { aulas.remove(numero); }
+    void eliminarCurso(int numero) { cursos.remove(numero); }
+    void eliminarAlumnos(int numero) { alumnos.remove(numero); }
     void eliminarProfesores(int numero){
         profesores.remove(numero);
     }
