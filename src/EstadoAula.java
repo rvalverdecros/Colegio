@@ -1,7 +1,7 @@
 public class EstadoAula {
 
-    static String libre = "libre";
-    static String ocupado = "ocupado";
-    static String enObras = "en obras";
+    final static String libre = "libre";
+    final static String ocupado = "ocupado";
+    final static String enObras = "en obras";
 
 }

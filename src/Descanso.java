@@ -1,6 +1,6 @@
 public class Descanso{
-    static String excursion = "Excursion";
-    static String vacaciones = "Vacaciones";
-    static String recreo = "Recreo";
-    static String festivo = "Festivo";
+    final static String excursion = "Excursion";
+    final static String vacaciones = "Vacaciones";
+    final static String recreo = "Recreo";
+    final static String festivo = "Festivo";
 }

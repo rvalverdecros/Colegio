@@ -1,10 +1,9 @@
-import java.util.Iterator;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
 
-    public void menu() {
+    public static void menu() {
 
         Colegio colegio = new Colegio("IES Rafael Alberti");
 
@@ -64,7 +63,7 @@ public class Main {
 
     }
 
-    private void opciones() {
+    private static void opciones() {
         System.out.println("1. Creación de aula");
         System.out.println("2. Creación de curso");
         System.out.println("3. Creación de profesor");
@@ -81,7 +80,7 @@ public class Main {
         System.out.println("14. Cerrar Sesión");
     }
 
-    private void creacionaula(Colegio colegio) {
+    private static void creacionaula(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Escriba el nombre del Aula");
         String nombre = scanner.nextLine();
@@ -103,10 +102,11 @@ public class Main {
             estado = EstadoAula.libre;
         }
         Aula aula = new Aula(nombre, pizarra, sillas, mesas);
+        aula.setEstado(estado);
         colegio.anadirAula(aula);
     }
 
-    private void creacioncurso(Colegio colegio) {
+    private static void creacioncurso(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Introduzca el nombre del curso: ");
         String nombre = scanner.nextLine();
@@ -115,7 +115,7 @@ public class Main {
         colegio.anadirCurso(cursoNuevo);
     }
 
-    private void creacionprofesor(Colegio colegio) {
+    private static void creacionprofesor(Colegio colegio) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduzca el nombre completo del profesor: ");
         String nombre = sc.nextLine();
@@ -130,7 +130,7 @@ public class Main {
         colegio.anadirProfesor(profesorNuevo);
     }
 
-    private void creacionalumno(Colegio colegio) {
+    private static void creacionalumno(Colegio colegio) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduzca el nombre completo del alumno: ");
         String nombre = sc.nextLine();
@@ -146,7 +146,7 @@ public class Main {
         colegio.anadirAlumno(alumnoNuevo);
     }
 
-    private void modificacionaula(Colegio colegio) {
+    private static void modificacionaula(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < colegio.aulas.size(); i++) {
             System.out.println(i + ". " + colegio.aulas.get(i));
@@ -205,7 +205,7 @@ public class Main {
         }
     }
 
-    private void modificacioncurso(Colegio colegio) {
+    private static void modificacioncurso(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < colegio.cursos.size(); i++) {
             System.out.println(i + ". " + colegio.cursos.get(i));
@@ -228,7 +228,23 @@ public class Main {
                     colegio.cursos.get(opcion).setNombre(nombre);
                 }
                 case 2 -> {
-                    // TODO: Switch con estados
+
+                    System.out.println("Introduzca el estado de la clase");
+                    String estado = scanner.nextLine();
+                    String estadoCurso;
+                    switch (estado){
+                        case Actividades.celebracion -> estadoCurso = Actividades.celebracion;
+                        case Actividades.jornadaDep -> estadoCurso = Actividades.jornadaDep;
+                        case Actividades.teatro -> estadoCurso = Actividades.teatro;
+                        case Descanso.excursion -> estadoCurso = Descanso.excursion;
+                        case Descanso.festivo -> estadoCurso = Descanso.festivo;
+                        case Descanso.recreo-> estadoCurso = Descanso.recreo;
+                        case Descanso.vacaciones-> estadoCurso = Descanso.vacaciones;
+                        default -> estadoCurso = Actividades.clase;
+                    };
+
+                    colegio.cursos.get(opcion).setEstado(estadoCurso);
+
                 }
                 case 3 -> {
                     System.out.println("Introduzca el DNI del alumno a ingresar en el curso: ");
@@ -295,7 +311,7 @@ public class Main {
         }
     }
 
-    private void modificacionprofesor(Colegio colegio) {
+    private static void modificacionprofesor(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < colegio.profesores.size(); i++) {
             System.out.println(i + ". " + colegio.profesores.get(i));
@@ -329,7 +345,9 @@ public class Main {
                     colegio.profesores.get(opcion).setSexo(sexo);
                 }
                 case 4 -> {
-                    // TODO: Switch con estados 2
+                    System.out.println("Introduzca el estado del profesor");
+                    String estado = scanner.nextLine();
+                    colegio.profesores.get(opcion).setEstado(estado);
                 }
                 case 5 -> {
                     System.out.println("¿Que material quiere añadir?");
@@ -367,7 +385,7 @@ public class Main {
         }
     }
 
-    private void modificacionalumno(Colegio colegio) {
+    private static void modificacionalumno(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < colegio.alumnos.size(); i++) {
             System.out.println(i + ". " + colegio.alumnos.get(i));
@@ -400,7 +418,9 @@ public class Main {
                     colegio.alumnos.get(opcion).setSexo(sexo);
                 }
                 case 4 -> {
-                    // TODO: Switch con estados 2
+                    System.out.println("Introduzca el estado del alumno");
+                    String estado = scanner.nextLine();
+                    colegio.alumnos.get(opcion).setEstado(estado);
                 }
                 case 5 -> {
                     System.out.println("¿Que material quiere añadir?");
@@ -427,7 +447,7 @@ public class Main {
         }
     }
 
-    private void borraraula(Colegio colegio) {
+    private static void borraraula(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < colegio.aulas.size(); i++) {
             System.out.println(i + ". " + colegio.aulas.get(i));
@@ -442,7 +462,7 @@ public class Main {
         }
     }
 
-    private void borrarcurso(Colegio colegio) {
+    private static void borrarcurso(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < colegio.cursos.size(); i++) {
             System.out.println(i + ". " + colegio.cursos.get(i));
@@ -457,7 +477,7 @@ public class Main {
         }
     }
 
-    private void borrarprofesor(Colegio colegio) {
+    private static void borrarprofesor(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < colegio.profesores.size(); i++) {
             System.out.println(i + ". " + colegio.profesores.get(i));
@@ -472,7 +492,7 @@ public class Main {
         }
     }
 
-    private void borraralumno(Colegio colegio) {
+    private static void borraralumno(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < colegio.alumnos.size(); i++) {
             System.out.println(i + ". " + colegio.alumnos.get(i));
@@ -487,7 +507,7 @@ public class Main {
         }
     }
 
-    private void mostrartodo(Colegio colegio){
+    private static void mostrartodo(Colegio colegio){
         System.out.println("Aulas");
         colegio.mostrarAula();
         System.out.println("Cursos");
@@ -498,12 +518,12 @@ public class Main {
         colegio.mostrarProfesor();
     }
 
-    private void cerrarsesion(){
+    private static void cerrarsesion(){
         System.out.println("Adios!");
         System.exit(0);
     }
 
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        menu();
     }
 }
