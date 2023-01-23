@@ -64,10 +64,19 @@ public class Aula {
         String tienePizarra = "";
         if (pizarra) tienePizarra = "Sí"; else tienePizarra = "No";
 
+        String nombreCurso;
+
+        if(curso != null){
+            nombreCurso = curso.getNombre();
+        }else{
+            nombreCurso = "";
+        }
+
         return "AULA: " + nombreAula + "\n"
                 + "Pizarra: " + tienePizarra + "\n"
                 + "Sillas: " + sillas + "\n"
                 + "Mesas: " + mesas + "\n"
-                + "Estado: " + estado;
+                + "Estado: " + estado + "\n"
+                + "Curso:" + nombreCurso;
     }
 }

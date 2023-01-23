@@ -130,6 +130,7 @@ public class Main {
             System.out.println("3.Sillas");
             System.out.println("4.Mesas");
             System.out.println("5.Estado");
+            System.out.println("6.Cambiar curso");
             int res = scanner.nextInt();
             switch (res) {
                 case 1 -> {
@@ -169,6 +170,45 @@ public class Main {
                         estado = EstadoAula.libre;
                     }
                     colegio.aulas.get(opcion).setEstado(estado);
+                    menu(colegio);
+                }
+                case 6 -> {
+                    if (colegio.aulas.get(opcion).getCurso() != null){
+                        System.out.println("¿Que quieres hacer?");
+                        System.out.println("1. Cambiar el curso que usa el aula");
+                        System.out.println("2. Retirar el curso que usa el aula");
+                        int res1 = scanner.nextInt();
+
+                        switch (res1){
+                            case 1 -> {
+                                System.out.println("Elige el curso que quieres que reemplace al actual");
+                                for (int i = 0; i < colegio.cursos.size(); i++) {
+                                    System.out.println(i + ". " + colegio.cursos.get(i));
+                                }
+                                System.out.println("Seleccione una opción: ");
+                                int opcion2 = scanner.nextInt();
+                                colegio.aulas.get(opcion).setCurso(colegio.cursos.get(opcion2));
+                            }
+
+                            case 2 -> {
+                                colegio.aulas.get(opcion).setCurso(null);
+                            }
+                            default -> {
+                                System.out.println("¡Opción Invalida!");
+                                menu(colegio);
+                            }
+                        }
+
+                    }else{
+
+                        System.out.println("¿Que curso quieres que use el aula");
+                        for (int i = 0; i < colegio.cursos.size(); i++) {
+                            System.out.println(i + ". " + colegio.cursos.get(i));
+                        }
+                        System.out.println("Seleccione una opción: ");
+                        int opcion2 = scanner.nextInt();
+                        colegio.aulas.get(opcion).setCurso(colegio.cursos.get(opcion2));
+                    }
                     menu(colegio);
                 }
                 default -> {
