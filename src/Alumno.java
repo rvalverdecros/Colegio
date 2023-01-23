@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Alumno extends Persona {
     // Atributos
     String estado;
-    private ArrayList<Material> lisMateriales;
+    private ArrayList<Material> lisMateriales = new ArrayList<>();
 
     // Constructor primario y secundario
     Alumno(String dni, String nombre, int edad, String sexo, String estado){
