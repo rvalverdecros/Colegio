@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Colegio {
     // Atributos
@@ -31,7 +32,7 @@ public class Colegio {
     String mostrarCurso () {
         StringBuilder cursosAMostrar = new StringBuilder();
         for (Curso curso : cursos) {
-            cursosAMostrar.append(curso);
+            cursosAMostrar.append(curso.toString());
             cursosAMostrar.append("\n");
         }
         return cursosAMostrar.toString();
@@ -72,7 +73,7 @@ public class Colegio {
         Alumno alumnoAModificar = null;
 
         for (Alumno alumno: alumnos) {
-            if (alumno.dni == DNI) alumnoAModificar = alumno;
+            if (Objects.equals(alumno.dni, DNI)) alumnoAModificar = alumno;
         }
         return alumnoAModificar;
     }
