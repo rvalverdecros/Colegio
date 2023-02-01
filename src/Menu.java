@@ -117,23 +117,35 @@ public class Menu {
     private static String comprobarsexAlumno(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduzca el género del alumno (Hombre/Mujer): ");
-        String sexo = sc.next();
-        if (sexo.toLowerCase() != "hombre" || sexo.toLowerCase() != "mujer"){
+        String sexo = sc.nextLine();
+        Boolean bien = false;
+        if (sexo.equalsIgnoreCase("hombre")){
+            bien = true;
+        }
+        if (sexo.equalsIgnoreCase("mujer")){
+            bien = true;
+        }
+        if (!bien){
             comprobarsexAlumno();
         }
         return sexo;
-
     }
 
     private static String comprobarsexProfesor(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduzca el género del alumno (Hombre/Mujer): ");
-        String sexo = sc.next();
-        if (sexo.toLowerCase() != "hombre" || sexo.toLowerCase() != "mujer"){
-            comprobarsexProfesor();
+        String sexo = sc.nextLine();
+        Boolean bien = false;
+        if (sexo.equalsIgnoreCase("hombre")){
+            bien = true;
+        }
+        if (sexo.equalsIgnoreCase("mujer")){
+            bien = true;
+        }
+        if (!bien){
+            comprobarsexAlumno();
         }
         return sexo;
-
     }
 
     private static void modificacionaula(Colegio colegio) {
