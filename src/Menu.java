@@ -89,8 +89,7 @@ public class Menu {
         String nombre = sc.next();
         System.out.println("Introduzca la edad del profesor: ");
         int edad = sc.nextInt();
-        System.out.println("Introduzca el género del profesor (Hombre/Mujer): ");
-        String genero = sc.next();
+        String genero = comprobarsexProfesor();
         System.out.println("Introduzca el DNI del profesor: ");
         String dni = sc.next();
 
@@ -105,8 +104,7 @@ public class Menu {
         String nombre = sc.next();
         System.out.println("Introduzca la edad del alumno: ");
         int edad = sc.nextInt();
-        System.out.println("Introduzca el género del alumno (Hombre/Mujer): ");
-        String sexo = sc.next();
+        String sexo = comprobarsexAlumno();
         System.out.println("Introduzca el DNI del alumno: ");
         String dni = sc.next();
 
@@ -114,6 +112,28 @@ public class Menu {
 
         colegio.anadirAlumno(alumnoNuevo);
         menu(colegio);
+    }
+
+    private static String comprobarsexAlumno(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduzca el género del alumno (Hombre/Mujer): ");
+        String sexo = sc.next();
+        if (sexo.toLowerCase() != "hombre" || sexo.toLowerCase() != "mujer"){
+            comprobarsexAlumno();
+        }
+        return sexo;
+
+    }
+
+    private static String comprobarsexProfesor(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduzca el género del alumno (Hombre/Mujer): ");
+        String sexo = sc.next();
+        if (sexo.toLowerCase() != "hombre" || sexo.toLowerCase() != "mujer"){
+            comprobarsexProfesor();
+        }
+        return sexo;
+
     }
 
     private static void modificacionaula(Colegio colegio) {
