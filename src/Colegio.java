@@ -55,7 +55,17 @@ public class Colegio {
     }
     void eliminarAula(int numero) { aulas.remove(numero); }
     void eliminarCurso(int numero) { cursos.remove(numero); }
-    void eliminarAlumnos(int numero) { alumnos.remove(numero); }
+    void eliminarAlumnos(int numero) {
+        Alumno alumno = alumnos.get(numero);
+
+        for (Curso curso : cursos) {
+            if (curso.existeAlumno(alumno)){
+                curso.borrarAlumno(alumno);
+            }
+        }
+
+        alumnos.remove(alumno);
+    }
     void eliminarProfesores(int numero){
         profesores.remove(numero);
     }
