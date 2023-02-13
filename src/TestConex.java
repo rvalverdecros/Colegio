@@ -210,9 +210,9 @@ public class TestConex {
  				int edad = reset.getInt(4);
  				String sexo = reset.getString(5);
  				String estado = reset.getString(6);
- 				int IDCurso = reset.getInt(7);
- 				
- 				if(IDCurso != -1) {
+
+ 				if(reset.getObject(7) != null) {
+					int IDCurso = reset.getInt(7);
  					ArrayList<Curso> liscurso  = selectCursos();
  					Curso curso = null;
  					for(Curso newcurso:liscurso) {
@@ -233,6 +233,49 @@ public class TestConex {
    		}
     	 return lisalumnos;
      }
+
+	public ArrayList<Alumno> selectAlumnosByIDCurso(int idCurso){
+		ArrayList<Alumno> lisalumnos  = new ArrayList<>();
+		try {
+			cn = conexion.conectar();
+
+			PreparedStatement stmt = cn.prepareStatement("SELECT * FROM Alumnos WHERE IDCurso = ?");
+
+			stmt.setInt(1,idCurso);
+
+			ResultSet reset = stmt.executeQuery();
+
+
+			while(reset.next()) {
+				int ID = reset.getInt(1);
+				String nombre = reset.getString(2);
+				String DNI = reset.getString(3);
+				int edad = reset.getInt(4);
+				String sexo = reset.getString(5);
+				String estado = reset.getString(6);
+
+				if(reset.getObject(7) != null) {
+					int IDCurso = reset.getInt(7);
+					ArrayList<Curso> liscurso  = selectCursos();
+					Curso curso = null;
+					for(Curso newcurso:liscurso) {
+						if(newcurso.getID() == IDCurso) {
+							curso = newcurso;
+						}
+					}
+					Alumno alumno = new Alumno (ID,nombre,DNI,edad,sexo,estado,curso);
+					lisalumnos.add(alumno);
+				}else {
+					Alumno alumno = new Alumno (ID,nombre,DNI,edad,sexo,estado,null);
+					lisalumnos.add(alumno);
+				}
+			}
+
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lisalumnos;
+	}
      
      public ArrayList<Profesor> selectProfesores(){
     	 ArrayList<Profesor> lisprofesores  = new ArrayList<>();
@@ -274,6 +317,49 @@ public class TestConex {
    		}
     	 return lisprofesores;
      }
+
+	public ArrayList<Profesor> selectProfesoresByIDCurso(int idCurso){
+		ArrayList<Profesor> lisprofesores  = new ArrayList<>();
+		try {
+			cn = conexion.conectar();
+
+			PreparedStatement stmt = cn.prepareStatement("SELECT * FROM Profesores WHERE IDCurso = ?");
+
+			stmt.setInt(1,idCurso);
+
+			ResultSet reset = stmt.executeQuery();
+
+
+			while(reset.next()) {
+				int ID = reset.getInt(1);
+				String nombre = reset.getString(2);
+				String DNI = reset.getString(3);
+				int edad = reset.getInt(4);
+				String sexo = reset.getString(5);
+				String estado = reset.getString(6);
+				int IDCurso = reset.getInt(7);
+
+				if(IDCurso != -1) {
+					ArrayList<Curso> liscurso  = selectCursos();
+					Curso curso = null;
+					for(Curso newcurso:liscurso) {
+						if(newcurso.getID() == IDCurso) {
+							curso = newcurso;
+						}
+					}
+					Profesor profesor = new Profesor (ID,nombre,DNI,edad,sexo,estado,curso);
+					lisprofesores.add(profesor);
+				}else {
+					Profesor profesor = new Profesor (ID,nombre,DNI,edad,sexo,estado,null);
+					lisprofesores.add(profesor);
+				}
+			}
+
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lisprofesores;
+	}
      
      public void deleteAula(int numero) {
     	 try {
@@ -547,7 +633,21 @@ public class TestConex {
  			e.printStackTrace();
  		}
      }
-     
+
+	public void setCursoAlumnoNull(int id) {
+		try {
+			cn = conexion.conectar();
+			PreparedStatement stmt = cn.prepareStatement("UPDATE Alumnos SET IDCurso = null WHERE ID = ?");
+
+			stmt.setInt(1, id);
+
+			stmt.executeUpdate();
+
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
      public void setNombreProfesor(int id, String nombre) {
     	 try {
     		 cn = conexion.conectar();
@@ -637,6 +737,20 @@ public class TestConex {
  			e.printStackTrace();
  		}
      }
+
+	public void setCursoProfesorNull(int id) {
+		try {
+			cn = conexion.conectar();
+			PreparedStatement stmt = cn.prepareStatement("UPDATE Profesores SET IDCurso = null WHERE ID = ?");
+
+			stmt.setInt(1, id);
+
+			stmt.executeUpdate();
+
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
      
      public void añadirMaterialProfesor(int id, String material) {
     	 try {

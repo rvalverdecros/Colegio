@@ -66,9 +66,13 @@ public class Menu {
         int mesas = scanner.nextInt();
         System.out.println("¿Cual es el estado del aula?");
         String estado = scanner.next();
-        if (estado != EstadoAula.enObras && estado != EstadoAula.libre && estado != EstadoAula.ocupado) {
-            estado = EstadoAula.libre;
+
+        switch (estado){
+            case EstadoAula.enObras, EstadoAula.libre, EstadoAula.ocupado -> {}
+
+            default -> estado = EstadoAula.libre;
         }
+
         Aula aula = new Aula(nombre, pizarra, sillas, mesas);
         aula.setEstado(estado);
         colegio.anadirAula(aula);
@@ -187,12 +191,10 @@ public class Menu {
                         switch (res1){
                             case 1 -> {
                                 System.out.println("Elige el curso que quieres que reemplace al actual");
-                                for (int i = 0; i < colegio.cursos.size(); i++) {
-                                    System.out.println(i + ". " + colegio.cursos.get(i));
-                                }
+                                System.out.println(colegio.mostrarCurso());
                                 System.out.println("Seleccione una opción: ");
                                 int opcion2 = scanner.nextInt();
-                                colegio.findAula(opcion).setCurso(colegio.cursos.get(opcion2));
+                                colegio.findAula(opcion).setCurso(colegio.findCurso(opcion2));
                             }
 
                             case 2 -> {
@@ -207,12 +209,10 @@ public class Menu {
                     }else{
 
                         System.out.println("¿Que curso quieres que use el aula");
-                        for (int i = 0; i < colegio.cursos.size(); i++) {
-                            System.out.println(i + ". " + colegio.cursos.get(i));
-                        }
+                        System.out.println(colegio.mostrarCurso());
                         System.out.println("Seleccione una opción: ");
                         int opcion2 = scanner.nextInt();
-                        colegio.getAulas().get(opcion).setCurso(colegio.cursos.get(opcion2));
+                        colegio.findAula(opcion).setCurso(colegio.findCurso(opcion2));
                     }
                     menu(colegio);
                 }
@@ -229,12 +229,10 @@ public class Menu {
 
     private static void modificacioncurso(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < colegio.cursos.size(); i++) {
-            System.out.println(i + ". " + colegio.cursos.get(i));
-        }
+        System.out.println(colegio.mostrarCurso());
         System.out.println("Seleccione una opción: ");
         int opcion = scanner.nextInt();
-        if (opcion < colegio.cursos.size()) {
+        if (colegio.findCurso(opcion) != null) {
             System.out.println("¿Que opción le gustaría modificar?");
             System.out.println("1. Nombre");
             System.out.println("2. Estado");
@@ -247,7 +245,7 @@ public class Menu {
                 case 1 -> {
                     System.out.println("Escriba un nuevo nombre: ");
                     String nombre = scanner.next();
-                    colegio.cursos.get(opcion).setNombre(nombre);
+                    colegio.findCurso(opcion).setNombre(nombre);
                     menu(colegio);
                 }
                 case 2 -> {
@@ -264,16 +262,16 @@ public class Menu {
                         case Descanso.vacaciones-> estadoCurso = Descanso.vacaciones;
                         default -> estadoCurso = Actividades.clase;
                     };
-                    colegio.cursos.get(opcion).setEstado(estadoCurso);
+                    colegio.findCurso(opcion).setEstado(estadoCurso);
                     menu(colegio);
                 }
                 case 3 -> {
-                    System.out.println("Introduzca el DNI del alumno a ingresar en el curso: ");
-                    String DNI = scanner.next();
-                    Alumno alumno = colegio.getAlumno(DNI);
+                    System.out.println("Introduzca la id del alumno a ingresar en el curso: ");
+                    int id = scanner.nextInt();
+                    Alumno alumno = colegio.findAlumno(id);
                     if (alumno != null) {
-                        if (!colegio.cursos.get(opcion).existeAlumno(alumno)) {
-                            colegio.cursos.get(opcion).anadirAlumno(alumno);
+                        if (!colegio.findCurso(opcion).existeAlumno(alumno)) {
+                            colegio.findCurso(opcion).anadirAlumno(alumno);
                             menu(colegio);
                         } else {
                             System.out.println("¡Ese alumno ya está en el curso!");
@@ -285,12 +283,12 @@ public class Menu {
                     }
                 }
                 case 4 -> {
-                    System.out.println("Introduzca el DNI del profesor a ingresar en el curso: ");
-                    String DNI = scanner.next();
-                    Profesor profesor = colegio.getProfesor(DNI);
+                    System.out.println("Introduzca la id del profesor a ingresar en el curso: ");
+                    int id = scanner.nextInt();
+                    Profesor profesor = colegio.findProfesor(id);
                     if (profesor != null) {
-                        if (!colegio.cursos.get(opcion).existeProfesor(profesor)) {
-                            colegio.cursos.get(opcion).anadirProfesor(profesor);
+                        if (!colegio.findCurso(opcion).existeProfesor(profesor)) {
+                            colegio.findCurso(opcion).anadirProfesor(profesor);
                             menu(colegio);
                         } else {
                             System.out.println("¡Ese profesor ya está en el curso!");
@@ -302,12 +300,12 @@ public class Menu {
                     }
                 }
                 case 5 -> {
-                    System.out.println("Introduzca el DNI del alumno a borrar del curso: ");
-                    String DNI = scanner.next();
-                    Alumno alumno = colegio.getAlumno(DNI);
+                    System.out.println("Introduzca la id del alumno a borrar del curso: ");
+                    int id = scanner.nextInt();
+                    Alumno alumno = colegio.findAlumno(id);
                     if (alumno != null) {
-                        if (colegio.cursos.get(opcion).existeAlumno(alumno)) {
-                            colegio.cursos.get(opcion).borrarAlumno(alumno);
+                        if (colegio.findCurso(opcion).existeAlumno(alumno)) {
+                            colegio.findCurso(opcion).borrarAlumno(alumno);
                             menu(colegio);
                         } else {
                             System.out.println("¡Ese alumno no está en el curso!");
@@ -319,12 +317,12 @@ public class Menu {
                     }
                 }
                 case 6 -> {
-                    System.out.println("Introduzca el DNI del profesor a borrar del curso: ");
-                    String DNI = scanner.next();
-                    Profesor profesor = colegio.getProfesor(DNI);
+                    System.out.println("Introduzca la id del profesor a borrar del curso: ");
+                    int id = scanner.nextInt();
+                    Profesor profesor = colegio.findProfesor(id);
                     if (profesor != null) {
-                        if (colegio.cursos.get(opcion).existeProfesor(profesor)) {
-                            colegio.cursos.get(opcion).borrarProfesor(profesor);
+                        if (colegio.findCurso(opcion).existeProfesor(profesor)) {
+                            colegio.findCurso(opcion).borrarProfesor(profesor);
                             menu(colegio);
                         } else {
                             System.out.println("¡Ese profesor no está en el curso!");
@@ -342,12 +340,10 @@ public class Menu {
 
     private static void modificacionprofesor(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < colegio.profesores.size(); i++) {
-            System.out.println(i + ". " + colegio.profesores.get(i));
-        }
+        System.out.println(colegio.mostrarProfesor());
         System.out.println("Seleccione una opción: ");
         int opcion = scanner.nextInt();
-        if (opcion < colegio.profesores.size()) {
+        if (colegio.findProfesor(opcion) != null) {
             System.out.println("¿Que opción le gustaría modificar?");
             System.out.println("1. Nombre");
             System.out.println("2. DNI");
@@ -362,46 +358,46 @@ public class Menu {
                 case 1 -> {
                     System.out.println("Escriba un nuevo nombre: ");
                     String nombre = scanner.next();
-                    colegio.profesores.get(opcion).setNombreProfesor(nombre);
+                    colegio.findProfesor(opcion).setNombreProfesor(nombre);
                     menu(colegio);
                 }
                 case 2 -> {
                     System.out.println("Escriba un nuevo dni: ");
                     String dni = scanner.next();
-                    colegio.profesores.get(opcion).setDNIProfesor(dni);
+                    colegio.findProfesor(opcion).setDNIProfesor(dni);
                     menu(colegio);
                 }
                 case 3 -> {
                     System.out.println("Escriba la nueva edad: ");
                     int edad = scanner.nextInt();
-                    colegio.profesores.get(opcion).setEdadProfesor(edad);
+                    colegio.findProfesor(opcion).setEdadProfesor(edad);
                     menu(colegio);
                 }
                 case 4 -> {
                     System.out.println("Escriba el nuevo sexo (HOMBRE/MUJER): ");
                     String sexo = scanner.next();
-                    colegio.profesores.get(opcion).setSexoProfesor(sexo);
+                    colegio.findProfesor(opcion).setSexoProfesor(sexo);
                     menu(colegio);
                 }
                 case 5 -> {
                     System.out.println("Introduzca el estado del profesor: ");
                     String estado = scanner.next();
-                    colegio.profesores.get(opcion).setEstadoProfesor(estado);
+                    colegio.findProfesor(opcion).setEstadoProfesor(estado);
                     menu(colegio);
                 }
                 case 6 -> {
                     System.out.println("¿Que material quiere añadir?");
                     String material = scanner.next();
                     Material materialNuevo = new Material(material);
-                    colegio.profesores.get(opcion).anadirMaterialProfesor(materialNuevo);
+                    colegio.findProfesor(opcion).anadirMaterialProfesor(materialNuevo);
                     menu(colegio);
                 }
                 case 7 -> {
                     System.out.println("¿Que material quiere eliminar?");
                     String material = scanner.next();
                     Material materialABorrar = new Material(material);
-                    if (colegio.profesores.get(opcion).existeMaterialProfesor(materialABorrar)) {
-                        colegio.profesores.get(opcion).dejarMaterialProfesor(materialABorrar);
+                    if (colegio.findProfesor(opcion).existeMaterialProfesor(materialABorrar)) {
+                        colegio.findProfesor(opcion).dejarMaterialProfesor(materialABorrar);
                         menu(colegio);
                     } else {
                         System.out.println("¡No existe ese material!");
@@ -412,10 +408,10 @@ public class Menu {
                     System.out.println("¿Desea que el profesor en cuestión sea miembro directivo (SI/NO)?");
                     String opcionMiembroDirectivo = scanner.next();
                     if (opcionMiembroDirectivo.toLowerCase() == "si") {
-                        colegio.profesores.get(opcion).setMiembroDirectivo(true);
+                        colegio.findProfesor(opcion).setMiembroDirectivo(true);
                         menu(colegio);
                     } else if (opcionMiembroDirectivo.toLowerCase() == "no") {
-                        colegio.profesores.get(opcion).setMiembroDirectivo(false);
+                        colegio.findProfesor(opcion).setMiembroDirectivo(false);
                         menu(colegio);
                     } else {
                         System.out.println("¡Error! ¡Opción no valida!");
@@ -435,12 +431,10 @@ public class Menu {
 
     private static void modificacionalumno(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < colegio.alumnos.size(); i++) {
-            System.out.println(i + ". " + colegio.alumnos.get(i));
-        }
+        System.out.println(colegio.mostrarAlumno());
         System.out.println("Seleccione una opción: ");
         int opcion = scanner.nextInt();
-        if (opcion < colegio.alumnos.size()) {
+        if (colegio.findAlumno(opcion) != null) {
             System.out.println("¿Que opción le gustaría modificar?");
             System.out.println("1. Nombre");
             System.out.println("2. DNI");
@@ -454,46 +448,46 @@ public class Menu {
                 case 1 -> {
                     System.out.println("Escriba un nuevo nombre: ");
                     String nombre = scanner.next();
-                    colegio.alumnos.get(opcion).setNombreAlumno(nombre);
+                    colegio.findAlumno(opcion).setNombreAlumno(nombre);
                     menu(colegio);
                 }
                 case 2 -> {
                     System.out.println("Escriba un nuevo nombre: ");
                     String dni = scanner.next();
-                    colegio.alumnos.get(opcion).setDNIAlumno(dni);
+                    colegio.findAlumno(opcion).setDNIAlumno(dni);
                     menu(colegio);
                 }
                 case 3 -> {
                     System.out.println("Escriba la nueva edad: ");
                     int edad = scanner.nextInt();
-                    colegio.alumnos.get(opcion).setEdadAlumno(edad);
+                    colegio.findAlumno(opcion).setEdadAlumno(edad);
                     menu(colegio);
                 }
                 case 4 -> {
                     System.out.println("Escriba el nuevo sexo (HOMBRE/MUJER): ");
                     String sexo = scanner.next();
-                    colegio.alumnos.get(opcion).setSexoAlumno(sexo);
+                    colegio.findAlumno(opcion).setSexoAlumno(sexo);
                     menu(colegio);
                 }
                 case 5 -> {
                     System.out.println("Introduzca el estado del alumno: ");
                     String estado = scanner.next();
-                    colegio.alumnos.get(opcion).setEstadoAlumno(estado);
+                    colegio.findAlumno(opcion).setEstadoAlumno(estado);
                     menu(colegio);
                 }
                 case 6 -> {
                     System.out.println("¿Que material quiere añadir?");
                     String material = scanner.next();
                     Material materialNuevo = new Material(material);
-                    colegio.alumnos.get(opcion).anadirMaterialAlumno(materialNuevo);
+                    colegio.findAlumno(opcion).anadirMaterialAlumno(materialNuevo);
                     menu(colegio);
                 }
                 case 7 -> {
                     System.out.println("¿Que material quiere eliminar?");
                     String material = scanner.next();
                     Material materialABorrar = new Material(material);
-                    if (colegio.alumnos.get(opcion).existeMaterialAlumno(materialABorrar)) {
-                        colegio.alumnos.get(opcion).dejarMaterialAlumno(materialABorrar);
+                    if (colegio.findAlumno(opcion).existeMaterialAlumno(materialABorrar)) {
+                        colegio.findAlumno(opcion).dejarMaterialAlumno(materialABorrar);
                         menu(colegio);
                     } else {
                         System.out.println("¡No existe ese material!");
@@ -513,10 +507,10 @@ public class Menu {
 
     private static void borraraula(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < colegio.aulas.size(); i++) { System.out.println(i + ". " + colegio.aulas.get(i)); }
+        System.out.println(colegio.mostrarAula());
         System.out.println("Seleccione una opción: ");
         int opcion = scanner.nextInt();
-        if (opcion < colegio.aulas.size()) {
+        if (colegio.findAula(opcion) != null) {
             colegio.eliminarAula(opcion);
             System.out.println("Se ha eliminado correctamente");
             menu(colegio);
@@ -528,10 +522,10 @@ public class Menu {
 
     private static void borrarcurso(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < colegio.cursos.size(); i++) { System.out.println(i + ". " + colegio.cursos.get(i)); }
+        System.out.println(colegio.mostrarCurso());
         System.out.println("Seleccione una opción: ");
         int opcion = scanner.nextInt();
-        if (opcion < colegio.cursos.size()) {
+        if (colegio.findCurso(opcion) != null) {
             colegio.eliminarCurso(opcion);
             System.out.println("Se ha eliminado correctamente");
             menu(colegio);
@@ -543,10 +537,10 @@ public class Menu {
 
     private static void borrarprofesor(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < colegio.profesores.size(); i++) { System.out.println(i + ". " + colegio.profesores.get(i)); }
+        System.out.println(colegio.mostrarProfesor());
         System.out.println("Seleccione una opción: ");
         int opcion = scanner.nextInt();
-        if (opcion < colegio.profesores.size()) {
+        if (colegio.findProfesor(opcion) != null) {
             colegio.eliminarProfesores(opcion);
             System.out.println("Se ha eliminado correctamente");
             menu(colegio);
@@ -558,10 +552,10 @@ public class Menu {
 
     private static void borraralumno(Colegio colegio) {
         Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < colegio.alumnos.size(); i++) { System.out.println(i + ". " + colegio.alumnos.get(i)); }
+        System.out.println(colegio.mostrarAlumno());
         System.out.println("Seleccione una opción: ");
         int opcion = scanner.nextInt();
-        if (opcion < colegio.alumnos.size()) {
+        if (colegio.findAlumno(opcion) != null) {
             colegio.eliminarAlumnos(opcion);
             System.out.println("Se ha eliminado correctamente");
             menu(colegio);

@@ -71,53 +71,93 @@ public class Colegio {
     }
 
     String mostrarCurso () {
-    	ArrayList<Curso> liscurso = testConex.selectCursos();
         StringBuilder cursosAMostrar = new StringBuilder();
-        for (Curso curso : liscurso) {
+        for (Curso curso : getCursos()) {
             cursosAMostrar.append(curso.toString());
             cursosAMostrar.append("\n");
         }
         return cursosAMostrar.toString();
     }
+
+    ArrayList<Curso> getCursos(){ return testConex.selectCursos(); }
+
+    Curso findCurso(int idCurso){
+        Curso cursoSearch = null;
+
+        for (Curso curso : getCursos()){
+            if (curso.getID() == idCurso){
+                cursoSearch = curso;
+            }
+        }
+        return cursoSearch;
+    }
     String mostrarAlumno () {
-    	ArrayList<Alumno> lisalumno = testConex.selectAlumnos();
         StringBuilder alumnosAMostrar = new StringBuilder();
-        for (Alumno alumno : lisalumno) {
+        for (Alumno alumno : getAlumnos()) {
             alumnosAMostrar.append(alumno);
             alumnosAMostrar.append("\n");
         }
         return alumnosAMostrar.toString();
     }
+
+    ArrayList<Alumno> getAlumnos(){ return testConex.selectAlumnos(); }
+
+    Alumno findAlumno(int idAlumno){
+        Alumno alumnoSearch = null;
+
+        for (Alumno alumno : getAlumnos()){
+            if (alumno.getID() == idAlumno){
+                alumnoSearch = alumno;
+            }
+        }
+        return alumnoSearch;
+    }
+
     String mostrarProfesor () {
-    	ArrayList<Profesor> lisprofesor = testConex.selectProfesores();
         StringBuilder profesoresAMostrar = new StringBuilder();
-        for (Profesor profesor : lisprofesor) {
+        for (Profesor profesor : getProfesores()) {
             profesoresAMostrar.append(profesor);
             profesoresAMostrar.append("\n");
         }
         return profesoresAMostrar.toString();
     }
+
+    ArrayList<Profesor> getProfesores(){
+        return testConex.selectProfesores();
+    }
+
+    Profesor findProfesor(int idProfesor){
+        Profesor profesorSearch = null;
+
+        for (Profesor profesor : getProfesores()){
+            if (profesor.getID() == idProfesor){
+               profesorSearch = profesor;
+            }
+        }
+        return profesorSearch;
+    }
+
     void eliminarAula(int numero) { 
     	
-    	aulas.remove(numero);
+    	//aulas.remove(numero);
     	testConex.deleteAula(numero);
     	
     	}
     void eliminarCurso(int numero) { 
     	
-    	cursos.remove(numero);
+    	//cursos.remove(numero);
     	testConex.deleteCurso(numero);
     	
     	}
     void eliminarAlumnos(int numero) { 
     	
-    	alumnos.remove(numero);
+    	//alumnos.remove(numero);
     	testConex.deleteAlumno(numero);
     	
     	}
     void eliminarProfesores(int numero){
     	
-        profesores.remove(numero);
+        //profesores.remove(numero);
         testConex.deleteProfesor(numero);
         
     }

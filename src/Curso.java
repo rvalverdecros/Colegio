@@ -6,8 +6,8 @@ public class Curso {
     private String nombre;
     private String estado;
     private int alumnos;
-    private ArrayList<Alumno> losAlumnos = new ArrayList<Alumno>();
-    private ArrayList<Profesor> losProfesores = new ArrayList<Profesor>();
+    private ArrayList<Alumno> lisAlumnos = new ArrayList<>();
+    private ArrayList<Profesor> lisProfesores = new ArrayList<>();
     private TestConex testConex = new TestConex();
 
     // Constructor
@@ -56,28 +56,58 @@ public class Curso {
     }
 
     // Métodos privados
-    private ArrayList<Alumno> mostrarAlumnos() { return losAlumnos; }
-    private ArrayList<Profesor> mostrarProfesores() { return losProfesores; }
+    private ArrayList<Alumno> mostrarAlumnos() {
+        return testConex.selectAlumnosByIDCurso(getID());
+    }
+    private ArrayList<Profesor> mostrarProfesores() { return testConex.selectProfesoresByIDCurso(getID()); }
 
     // Métodos públicos
-    void anadirAlumno(Alumno alumno) { losAlumnos.add(alumno); }
+    void anadirAlumno(Alumno alumno) {
+        //losAlumnos.add(alumno);
+        testConex.setCursoAlumno(alumno.getID(),getID());
+    }
     void borrarAlumno(Alumno alumno){
-        losAlumnos.remove(alumno);
+        //losAlumnos.remove(alumno);
+        testConex.setCursoAlumnoNull(alumno.getID());
     }
     void anadirProfesor(Profesor profesor){
-        losProfesores.add(profesor);
+        //losProfesores.add(profesor);
+        testConex.setCursoProfesor(profesor.getID(),getID());
     }
     void borrarProfesor(Profesor profesor){
-        losProfesores.remove(profesor);
+
+        //losProfesores.remove(profesor);
+        testConex.setCursoProfesorNull(profesor.getID());
     }
 
     boolean existeAlumno(Alumno alumno) {
-        if (losAlumnos == null) return false;
-        return losAlumnos.contains(alumno);
+        lisAlumnos = mostrarAlumnos();
+        if (lisAlumnos == null) return false;
+
+        boolean encontrado = false;
+
+        for (Alumno alumno1 : lisAlumnos){
+            if (alumno1.getID() == alumno.getID()){
+                encontrado = true;
+            }
+        }
+
+        return encontrado;
     }
     boolean existeProfesor(Profesor profesor) {
-        if (losProfesores == null) return false;
-        return losProfesores.contains(profesor);
+        lisProfesores = mostrarProfesores();
+        if (lisProfesores == null) return false;
+
+        boolean encontrado = false;
+
+        for (Profesor profesor1 : lisProfesores){
+            if (profesor1.getID() == profesor.getID()){
+                encontrado = true;
+            }
+        }
+
+        return encontrado;
+
     }
 
     public String toString() {

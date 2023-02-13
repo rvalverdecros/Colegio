@@ -47,9 +47,8 @@ public class Alumno extends Persona {
     public Curso getCurso() { return curso; }
     public void setCurso(Curso curso) { 
     	this.curso = curso;
-    	testConex.setCursoAlumno(id,curso.getID());
-    	}
-    
+    }
+
     public String getNombreAlumno() { return getNombre(); }
     public void setNombreAlumno(String nombre) { 
     	setNombre(nombre);

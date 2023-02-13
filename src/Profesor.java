@@ -48,7 +48,6 @@ public class Profesor extends Persona {
     public Curso getCurso() { return curso; }
     public void setCurso(Curso curso) { 
     	this.curso = curso;
-    	testConex.setCursoProfesor(id,curso.getID());
     	}
 
     public boolean isMiembroDirectivo() { return miembroDirectivo; }
