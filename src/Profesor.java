@@ -99,11 +99,11 @@ public class Profesor extends Persona {
 
     // Métodos
     void anadirMaterialProfesor(Material material){
-        lisMateriales.add(material);
+        //lisMateriales.add(material);
         testConex.añadirMaterialProfesor(id,material.getNombre());
     }
     void dejarMaterialProfesor(Material material){ 
-    	lisMateriales.remove(material);
+    	//lisMateriales.remove(material);
     	testConex.borrarMaterialProfesor(id,material.getNombre());
     	}
     boolean existeMaterialProfesor(Material material) { 

@@ -11,7 +11,6 @@ public class TestConex {
 	private Conexion conexion =new Conexion();
 	private Connection cn = null;
 	
-	
 	public void insertCurso(String curso) {
 		
 		try {
@@ -366,6 +365,8 @@ public class TestConex {
     		 cn = conexion.conectar();
     		 
     		 PreparedStatement stmt = cn.prepareStatement("DELETE FROM Aula WHERE ID = ?");
+
+			 stmt.setInt(1,numero);
     		 
     		 stmt.executeUpdate();
     	 }catch (SQLException e) {
@@ -378,6 +379,8 @@ public class TestConex {
     		 cn = conexion.conectar();
     		 
     		 PreparedStatement stmt = cn.prepareStatement("DELETE FROM Curso WHERE ID = ?");
+
+			 stmt.setInt(1,numero);
     		 
     		 stmt.executeUpdate();
     	 }catch (SQLException e) {
@@ -390,6 +393,8 @@ public class TestConex {
     		 cn = conexion.conectar();
     		 
     		 PreparedStatement stmt = cn.prepareStatement("DELETE FROM Alumnos WHERE ID = ?");
+
+			 stmt.setInt(1,numero);
     		 
     		 stmt.executeUpdate();
     	 }catch (SQLException e) {
@@ -402,6 +407,8 @@ public class TestConex {
     		 cn = conexion.conectar();
     		 
     		 PreparedStatement stmt = cn.prepareStatement("DELETE FROM Profesores WHERE ID = ?");
+
+			 stmt.setInt(1,numero);
     		 
     		 stmt.executeUpdate();
     	 }catch (SQLException e) {
@@ -759,9 +766,9 @@ public class TestConex {
     	 		
     	 		PreparedStatement stmt = cn.prepareStatement("INSERT INTO Materiales_Profesores (Nombre,IDProfesor,Estado) VALUES (?, ?, ?)");	
     	 		  
-    	 		  stmt.setString(0, material);
-    	 		  stmt.setInt(1, id);
-    	 		  stmt.setString(2, "Nuevo");
+    	 		  stmt.setString(1, material);
+    	 		  stmt.setInt(2, id);
+    	 		  stmt.setString(3, "Nuevo");
     	 		  
     	 		  
     	 		  stmt.executeUpdate();		
@@ -779,9 +786,9 @@ public class TestConex {
     	 		
     	 		PreparedStatement stmt = cn.prepareStatement("INSERT INTO Materiales_Alumno (Nombre,IDAlumno,Estado) VALUES (?, ?, ?)");	
     	 		  
-    	 		  stmt.setString(0, material);
-    	 		  stmt.setInt(1, id);
-    	 		  stmt.setString(2, "Nuevo");
+    	 		  stmt.setString(1, material);
+    	 		  stmt.setInt(2, id);
+    	 		  stmt.setString(3, "Nuevo");
     	 		  
     	 		  
     	 		  stmt.executeUpdate();		
@@ -796,7 +803,10 @@ public class TestConex {
     	 try {
     		 cn = conexion.conectar();
     		 
-    		 PreparedStatement stmt = cn.prepareStatement("DELETE FROM Materiales_Profesores WHERE ID = ? AND NOMBRE = ?");
+    		 PreparedStatement stmt = cn.prepareStatement("DELETE FROM Materiales_Profesores WHERE IDProfesor = ? AND NOMBRE = ?");
+
+			 stmt.setInt(1,id);
+			 stmt.setString(2,material);
     		 
     		 stmt.executeUpdate();
     		 
@@ -809,7 +819,10 @@ public class TestConex {
     	 try {
     		 cn = conexion.conectar();
     		 
-    		 PreparedStatement stmt = cn.prepareStatement("DELETE FROM Materiales_Alumno WHERE ID = ? AND NOMBRE = ?");
+    		 PreparedStatement stmt = cn.prepareStatement("DELETE FROM Materiales_Alumno WHERE IDAlumno = ? AND NOMBRE = ?");
+
+			 stmt.setInt(1,id);
+			 stmt.setString(2,material);
     		 
     		 stmt.executeUpdate();
     		 
@@ -823,7 +836,10 @@ public class TestConex {
     	 try {
     		 cn = conexion.conectar();
     		 
-    		 PreparedStatement stmt = cn.prepareStatement("SELECT * FROM Materiales_Alumno WHERE ID = ? AND NOMBRE = ?");
+    		 PreparedStatement stmt = cn.prepareStatement("SELECT * FROM Materiales_Alumno WHERE IDAlumno = ? AND NOMBRE = ?");
+
+			 stmt.setInt(1,id);
+			 stmt.setString(2,material);
     		 
     		ResultSet res = stmt.executeQuery();
     		
@@ -845,7 +861,10 @@ public class TestConex {
     	 try {
     		 cn = conexion.conectar();
     		 
-    		 PreparedStatement stmt = cn.prepareStatement("SELECT * FROM Materiales_Profesores WHERE ID = ? AND NOMBRE = ?");
+    		 PreparedStatement stmt = cn.prepareStatement("SELECT * FROM Materiales_Profesores WHERE IDProfesor = ? AND NOMBRE = ?");
+
+			 stmt.setInt(1,id);
+			 stmt.setString(2,material);
     		 
     		ResultSet res = stmt.executeQuery();
     		
